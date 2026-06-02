@@ -171,11 +171,11 @@ Create a wallet to generate your address.
 Copy Address
 </button>
 
-<button class="btn secondary">
+<button class="btn secondary" onclick="receiveFunds()">
 Receive
 </button>
 
-<button class="btn secondary">
+<button class="btn secondary" onclick="sendFunds()">
 Send
 </button>
 
@@ -267,18 +267,31 @@ walletAddress;
 
 }
 
-function copyAddress(){
+function receiveFunds(){
 
 if(walletAddress===""){
-alert("Create wallet first");
+alert("Create a wallet first!");
 return;
 }
 
-navigator.clipboard.writeText(walletAddress);
+alert("Your wallet address:\n\n" + walletAddress);
 
-alert("Address copied!");
 }
 
+function sendFunds(){
+
+if(walletAddress===""){
+alert("Create a wallet first!");
+return;
+}
+
+let recipient = prompt("Enter recipient address:");
+
+if(recipient){
+alert("Demo transaction prepared for:\n\n" + recipient);
+}
+
+}
 </script>
 
 </body>
