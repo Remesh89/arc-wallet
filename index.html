@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Arc Wallet</title>
+<style>
+body{
+font-family:Arial;
+background:#0d1117;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.card{
+background:#161b22;
+padding:30px;
+border-radius:15px;
+width:400px;
+text-align:center;
+}
+
+button{
+background:#238636;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h1>Arc Wallet</h1>
+
+<p>Your balance</p>
+
+<h2>0.00 ARC</h2>
+
+<button onclick="createWallet()">
+Create Wallet
+</button>
+
+<p id="wallet"></p>
+
+</div>
+
+<script>
+
+function createWallet(){
+
+let chars="abcdef0123456789";
+
+let address="0x";
+
+for(let i=0;i<40;i++){
+
+address += chars[Math.floor(Math.random()*chars.length)];
+
+}
+
+document.getElementById("wallet").innerHTML=
+"<br><b>Wallet Address:</b><br>"+address;
+
+}
+
+</script>
+
+</body>
+</html>
