@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -142,9 +143,8 @@ testers, and communities exploring the Arc ecosystem.
 </p>
 
 <div class="cta">
-
-<button class="btn primary" onclick="createWallet()">
-Launch Wallet
+<button class="btn primary" onclick="connectWallet()">
+Connect Wallet
 </button>
 
 <button class="btn secondary">
@@ -238,50 +238,68 @@ Built by Remesh • Learning in Public 🚀
 
 <script>
 
-let walletAddress="";
+<script>
 
-function createWallet(){
+let walletAddress = "";
 
-const chars="abcdef0123456789";
+async function connectWallet(){
 
-walletAddress="0x";
+if(typeof window.ethereum === "undefined"){
+alert("MetaMask is not installed.");
+return;
+}
 
-for(let i=0;i<40;i++){
+try{
 
-walletAddress += chars[Math.floor(Math.random()*chars.length)];
+const accounts = await window.ethereum.request({
+method: "eth_requestAccounts"
+});
+
+walletAddress = accounts[0];
+
+document.getElementById("address").innerHTML =
+walletAddress;
+
+}
+catch(error){
+
+console.log(error);
 
 }
 
-document.getElementById("address").innerHTML=
-walletAddress;
+}
+
+function copyAddress(){
+
+if(walletAddress === ""){
+alert("Connect wallet first");
+return;
+}
+
+navigator.clipboard.writeText(walletAddress);
+
+alert("Address copied!");
 
 }
 
 function receiveFunds(){
 
 if(walletAddress===""){
-alert("Create a wallet first!");
+alert("Connect wallet first");
 return;
 }
 
-alert("Your wallet address:\n\n" + walletAddress);
+alert("Receive funds at:\n\n" + walletAddress);
 
 }
 
 function sendFunds(){
 
-if(walletAddress===""){
-alert("Create a wallet first!");
-return;
-}
-
-let recipient = prompt("Enter recipient address:");
-
-if(recipient){
-alert("Demo transaction prepared for:\n\n" + recipient);
-}
+alert("Real transactions coming soon.");
 
 }
+
+</script>
 </script>
 
 </body>
